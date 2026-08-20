@@ -4,56 +4,83 @@ $current_page = basename($_SERVER["PHP_SELF"]);
 
 ?>
 
-<aside>
+<aside class="sidebar">
 
-    <h2>📚 Library Management</h2>
+    <div class="sidebar-logo">
 
-    <nav>
+        <div class="logo-icon">📚</div>
 
-        <a href="/library-management/dashboard.php">
-            🏠 Dashboard
+        <div>
+            <h2>Libra</h2>
+            <span>Management System</span>
+        </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <p class="nav-heading">MAIN</p>
+
+        <a
+            href="/library-management/dashboard.php"
+            class="<?php echo $current_page == 'dashboard.php' ? 'active' : ''; ?>"
+        >
+            <span>🏠</span>
+            Dashboard
         </a>
 
-        <h4>Books</h4>
+
+        <p class="nav-heading">LIBRARY</p>
 
         <a href="/library-management/books/manage.php">
-            📖 All Books
+            <span>📖</span>
+            Books
         </a>
 
         <a href="/library-management/books/add.php">
-            ➕ Add Book
+            <span>➕</span>
+            Add Book
         </a>
 
-        <h4>Members</h4>
-
         <a href="/library-management/members/manage.php">
-            👥 All Members
+            <span>👥</span>
+            Members
         </a>
 
         <a href="/library-management/members/add.php">
-            ➕ Add Member
+            <span>➕</span>
+            Add Member
         </a>
 
-        <h4>Transactions</h4>
+
+        <p class="nav-heading">TRANSACTIONS</p>
 
         <a href="/library-management/transactions/issue.php">
-            📤 Issue Book
+            <span>📤</span>
+            Issue Book
         </a>
 
         <a href="/library-management/transactions/return.php">
-            📥 Return Book
+            <span>📥</span>
+            Return Book
         </a>
 
         <a href="/library-management/transactions/history.php">
-            📋 History
-        </a>
-
-        <br>
-
-        <a href="/library-management/logout.php">
-            🚪 Logout
+            <span>📋</span>
+            History
         </a>
 
     </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a href="/library-management/logout.php" class="logout-link">
+            <span>🚪</span>
+            Logout
+        </a>
+
+    </div>
 
 </aside>

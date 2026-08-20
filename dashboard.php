@@ -28,17 +28,18 @@ $overdue_books = $data["overdue_books"];
 ?>
 
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard - Library Management</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
+<html lang="en">
 
-<body>
-<!DOCTYPE html>
-<html>
 <head>
-    <title>Dashboard - Library Management</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Library Management</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
 
 <body>
@@ -106,7 +107,74 @@ $overdue_books = $data["overdue_books"];
 
     </div>
 
+
+    <div class="dashboard-section">
+
+        <div class="section-header">
+
+            <div>
+                <h2>Library Overview</h2>
+                <p>Quick access to your library operations.</p>
+            </div>
+
+        </div>
+
+
+        <div class="quick-actions">
+
+            <a href="books/add.php" class="action-card">
+
+                <span class="action-icon">📚</span>
+
+                <div>
+                    <h3>Add Book</h3>
+                    <p>Add a new book to the library.</p>
+                </div>
+
+            </a>
+
+
+            <a href="members/add.php" class="action-card">
+
+                <span class="action-icon">👤</span>
+
+                <div>
+                    <h3>Add Member</h3>
+                    <p>Register a new library member.</p>
+                </div>
+
+            </a>
+
+
+            <a href="transactions/issue.php" class="action-card">
+
+                <span class="action-icon">📤</span>
+
+                <div>
+                    <h3>Issue Book</h3>
+                    <p>Issue a book to a member.</p>
+                </div>
+
+            </a>
+
+
+            <a href="transactions/history.php" class="action-card">
+
+                <span class="action-icon">📋</span>
+
+                <div>
+                    <h3>Transaction History</h3>
+                    <p>View borrowing records.</p>
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
 </main>
 
 </body>
+
 </html>
