@@ -49,60 +49,138 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Add Member</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Member | Library Management</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
 </head>
 
 <body>
 
-<h1>Add New Member</h1>
+<?php include __DIR__ . "/../includes/sidebar.php"; ?>
 
-<?php if ($message): ?>
-    <p><?php echo htmlspecialchars($message); ?></p>
-<?php endif; ?>
+<main>
 
-<form method="POST">
+    <div class="page-title">
 
-    <label>Name</label><br>
-    <input
-        type="text"
-        name="name"
-        required
-    >
+        <h1>Add Member</h1>
 
-    <br><br>
+        <p>Register a new member in the library.</p>
 
-    <label>Email</label><br>
-    <input
-        type="email"
-        name="email"
-        required
-    >
+    </div>
 
-    <br><br>
 
-    <label>Phone</label><br>
-    <input
-        type="text"
-        name="phone"
-    >
+    <?php if (!empty($message)): ?>
 
-    <br><br>
+        <div class="message">
+            <?php echo htmlspecialchars($message); ?>
+        </div>
 
-    <label>Address</label><br>
-    <textarea name="address"></textarea>
+    <?php endif; ?>
 
-    <br><br>
 
-    <button type="submit">Add Member</button>
+    <div class="form-container">
 
-</form>
+        <form method="POST">
 
-<br>
 
-<a href="manage.php">View Members</a>
+            <div class="form-group">
+
+                <label for="name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter member name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter email address"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="phone">
+                    Phone Number
+                </label>
+
+                <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    placeholder="Enter phone number"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="address">
+                    Address
+                </label>
+
+                <textarea
+                    id="address"
+                    name="address"
+                    rows="4"
+                    placeholder="Enter member address"
+                ></textarea>
+
+            </div>
+
+
+            <div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    + Add Member
+                </button>
+
+                <a
+                    href="manage.php"
+                    class="btn btn-secondary"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
 
 </body>
 

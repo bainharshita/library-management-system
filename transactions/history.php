@@ -28,88 +28,143 @@ $result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Transaction History</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transaction History | Library Management</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
 </head>
 
 <body>
 
-<h1>Transaction History</h1>
+<?php include __DIR__ . "/../includes/sidebar.php"; ?>
 
-<table border="1" cellpadding="10">
+<main>
 
-    <thead>
+    <div class="page-title page-title-row">
 
-        <tr>
-            <th>ID</th>
-            <th>Member</th>
-            <th>Book</th>
-            <th>Issue Date</th>
-            <th>Due Date</th>
-            <th>Return Date</th>
-            <th>Fine</th>
-            <th>Status</th>
-        </tr>
+        <div>
 
-    </thead>
+            <h1>Transaction History</h1>
 
-    <tbody>
+            <p>View all book borrowing and return records.</p>
 
-    <?php while ($transaction = mysqli_fetch_assoc($result)): ?>
+        </div>
 
-        <tr>
+        <a
+            href="issue.php"
+            class="btn btn-primary"
+        >
+            + Issue Book
+        </a>
 
-            <td>
-                <?php echo $transaction["id"]; ?>
-            </td>
+    </div>
 
-            <td>
-                <?php echo htmlspecialchars($transaction["member_name"]); ?>
-            </td>
 
-            <td>
-                <?php echo htmlspecialchars($transaction["title"]); ?>
-            </td>
+    <div class="table-container">
 
-            <td>
-                <?php echo $transaction["issue_date"]; ?>
-            </td>
+        <table>
 
-            <td>
-                <?php echo $transaction["due_date"]; ?>
-            </td>
+            <thead>
 
-            <td>
-                <?php
-                echo $transaction["return_date"]
-                    ? $transaction["return_date"]
-                    : "Not Returned";
-                ?>
-            </td>
+                <tr>
 
-            <td>
-                ₹<?php echo $transaction["fine"]; ?>
-            </td>
+                    <th>ID</th>
+                    <th>Member</th>
+                    <th>Book</th>
+                    <th>Issue Date</th>
+                    <th>Due Date</th>
+                    <th>Return Date</th>
+                    <th>Fine</th>
+                    <th>Status</th>
 
-            <td>
-                <?php echo htmlspecialchars($transaction["status"]); ?>
-            </td>
+                </tr>
 
-        </tr>
+            </thead>
 
-    <?php endwhile; ?>
 
-    </tbody>
+            <tbody>
 
-</table>
+            <?php while ($transaction = mysqli_fetch_assoc($result)): ?>
 
-<br>
+                <tr>
 
-<a href="issue.php">Issue Book</a> |
-<a href="return.php">Return Book</a> |
-<a href="../dashboard.php">Dashboard</a>
+                    <td>
+                        <?php echo $transaction["id"]; ?>
+                    </td>
+
+                    <td>
+                        <strong>
+                            <?php echo htmlspecialchars($transaction["member_name"]); ?>
+                        </strong>
+                    </td>
+
+                    <td>
+                        <?php echo htmlspecialchars($transaction["title"]); ?>
+                    </td>
+
+                    <td>
+                        <?php echo $transaction["issue_date"]; ?>
+                    </td>
+
+                    <td>
+                        <?php echo $transaction["due_date"]; ?>
+                    </td>
+
+                    <td>
+
+                        <?php
+
+                        echo $transaction["return_date"]
+                            ? $transaction["return_date"]
+                            : "Not Returned";
+
+                        ?>
+
+                    </td>
+
+                    <td>
+
+                        ₹<?php echo $transaction["fine"]; ?>
+
+                    </td>
+
+                    <td>
+
+                        <?php if ($transaction["status"] === "Issued"): ?>
+
+                            <span class="status status-issued">
+                                Issued
+                            </span>
+
+                        <?php else: ?>
+
+                            <span class="status status-returned">
+                                Returned
+                            </span>
+
+                        <?php endif; ?>
+
+                    </td>
+
+                </tr>
+
+            <?php endwhile; ?>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</main>
 
 </body>
 

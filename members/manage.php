@@ -17,88 +17,133 @@ $result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Manage Members</title>
-    <script src="../assets/js/script.js"></script>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Members | Library Management</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <script src="../assets/js/script.js" defer></script>
+
 </head>
 
 <body>
 
-<h1>Manage Members</h1>
+<?php include __DIR__ . "/../includes/sidebar.php"; ?>
 
-<a href="add.php">+ Add Member</a>
+<main>
 
-<br><br>
+    <div class="page-title page-title-row">
 
-<input
-    type="text"
-    id="memberSearch"
-    placeholder="Search members..."
->
+        <div>
 
-<br><br>
+            <h1>Members</h1>
 
-<table id="membersTable" border="1" cellpadding="10">
+            <p>Manage registered library members.</p>
 
-    <thead>
+        </div>
 
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th>Actions</th>
-        </tr>
+        <a href="add.php" class="btn btn-primary">
+            + Add Member
+        </a>
 
-    </thead>
+    </div>
 
-    <tbody>
 
-    <?php while ($member = mysqli_fetch_assoc($result)): ?>
+    <div class="search-box">
 
-        <tr>
+        <input
+            type="text"
+            id="memberSearch"
+            placeholder="🔎 Search by name, email, phone..."
+        >
 
-            <td><?php echo $member["id"]; ?></td>
+    </div>
 
-            <td><?php echo htmlspecialchars($member["member_name"]); ?></td>
 
-            <td><?php echo htmlspecialchars($member["email"]); ?></td>
+    <div class="table-container">
 
-            <td><?php echo htmlspecialchars($member["phone"]); ?></td>
+        <table id="membersTable">
 
-            <td><?php echo htmlspecialchars($member["address"]); ?></td>
+            <thead>
 
-            <td>
+                <tr>
 
-                <a href="edit.php?id=<?php echo $member["id"]; ?>">
-                    Edit
-                </a>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Actions</th>
 
-                |
+                </tr>
 
-                <a
-                    href="delete.php?id=<?php echo $member["id"]; ?>"
-                    onclick="return confirmDelete();"
-                >
-                    Delete
-                </a>
+            </thead>
 
-            </td>
+            <tbody>
 
-        </tr>
+            <?php while ($member = mysqli_fetch_assoc($result)): ?>
 
-    <?php endwhile; ?>
+                <tr>
 
-    </tbody>
+                    <td>
+                        <?php echo $member["id"]; ?>
+                    </td>
 
-</table>
+                    <td>
+                        <strong>
+                            <?php echo htmlspecialchars($member["member_name"]); ?>
+                        </strong>
+                    </td>
 
-<br>
+                    <td>
+                        <?php echo htmlspecialchars($member["email"]); ?>
+                    </td>
 
-<a href="../dashboard.php">Back to Dashboard</a>
+                    <td>
+                        <?php echo htmlspecialchars($member["phone"]); ?>
+                    </td>
+
+                    <td>
+                        <?php echo htmlspecialchars($member["address"]); ?>
+                    </td>
+
+                    <td class="actions">
+
+                        <a
+                            href="edit.php?id=<?php echo $member["id"]; ?>"
+                            class="btn btn-small btn-edit"
+                        >
+                            Edit
+                        </a>
+
+                        <a
+                            href="delete.php?id=<?php echo $member["id"]; ?>"
+                            class="btn btn-small btn-delete"
+                            onclick="return confirmDelete();"
+                        >
+                            Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            <?php endwhile; ?>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</main>
 
 </body>
 

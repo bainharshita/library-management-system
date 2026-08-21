@@ -92,78 +92,140 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Edit Book</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Book | Library Management</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
 </head>
 
 <body>
 
-<h1>Edit Book</h1>
+<?php include __DIR__ . "/../includes/sidebar.php"; ?>
 
-<?php if ($message): ?>
-    <p><?php echo htmlspecialchars($message); ?></p>
-<?php endif; ?>
+<main>
 
-<form method="POST">
+    <div class="page-title">
 
-    <label>Book Title</label><br>
-    <input
-        type="text"
-        name="title"
-        value="<?php echo htmlspecialchars($book["title"]); ?>"
-        required
-    >
+        <h1>Edit Book</h1>
 
-    <br><br>
+        <p>Update the details of this book.</p>
 
-    <label>Author</label><br>
-    <input
-        type="text"
-        name="author"
-        value="<?php echo htmlspecialchars($book["author"]); ?>"
-        required
-    >
+    </div>
 
-    <br><br>
 
-    <label>ISBN</label><br>
-    <input
-        type="text"
-        name="isbn"
-        value="<?php echo htmlspecialchars($book["isbn"]); ?>"
-    >
+    <?php if (!empty($message)): ?>
 
-    <br><br>
+        <div class="message">
+            <?php echo htmlspecialchars($message); ?>
+        </div>
 
-    <label>Category</label><br>
-    <input
-        type="text"
-        name="category"
-        value="<?php echo htmlspecialchars($book["category"]); ?>"
-    >
+    <?php endif; ?>
 
-    <br><br>
 
-    <label>Quantity</label><br>
-    <input
-        type="number"
-        name="quantity"
-        min="1"
-        value="<?php echo $book["quantity"]; ?>"
-        required
-    >
+    <div class="form-container">
 
-    <br><br>
+        <form method="POST">
 
-    <button type="submit">Update Book</button>
+            <div class="form-group">
 
-</form>
+                <label for="title">
+                    Book Title
+                </label>
 
-<br>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    value="<?php echo htmlspecialchars($book["title"]); ?>"
+                    required
+                >
 
-<a href="manage.php">Back to Books</a>
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="author">
+                    Author
+                </label>
+
+                <input
+                    type="text"
+                    id="author"
+                    name="author"
+                    value="<?php echo htmlspecialchars($book["author"]); ?>"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="isbn">
+                    ISBN
+                </label>
+
+                <input
+                    type="text"
+                    id="isbn"
+                    name="isbn"
+                    value="<?php echo htmlspecialchars($book["isbn"]); ?>"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="quantity">
+                    Total Quantity
+                </label>
+
+                <input
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    min="1"
+                    value="<?php echo htmlspecialchars($book["quantity"]); ?>"
+                    required
+                >
+
+            </div>
+
+
+            <div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Save Changes
+                </button>
+
+                <a
+                    href="manage.php"
+                    class="btn btn-secondary"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
 
 </body>
 

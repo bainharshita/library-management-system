@@ -140,99 +140,121 @@ $result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>Return Book</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Return Book | Library Management</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
 
 </head>
 
 <body>
 
-<h1>Return Book</h1>
+<?php include __DIR__ . "/../includes/sidebar.php"; ?>
+
+<main>
+
+    <div class="page-title">
+
+        <h1>Return Book</h1>
+
+        <p>Manage currently issued books.</p>
+
+    </div>
 
 
-<?php if ($message): ?>
+    <?php if (!empty($message)): ?>
 
-    <p>
-        <?php echo htmlspecialchars($message); ?>
-    </p>
+        <div class="message">
+            <?php echo htmlspecialchars($message); ?>
+        </div>
 
-<?php endif; ?>
-
-
-<table border="1" cellpadding="10">
-
-    <thead>
-
-        <tr>
-
-            <th>Member</th>
-            <th>Book</th>
-            <th>Issue Date</th>
-            <th>Due Date</th>
-            <th>Action</th>
-
-        </tr>
-
-    </thead>
+    <?php endif; ?>
 
 
-    <tbody>
+    <div class="table-container">
 
-    <?php while ($transaction = mysqli_fetch_assoc($result)): ?>
+        <table>
 
-        <tr>
+            <thead>
 
-            <td>
-                <?php echo htmlspecialchars($transaction["member_name"]); ?>
-            </td>
+                <tr>
 
-            <td>
-                <?php echo htmlspecialchars($transaction["title"]); ?>
-            </td>
+                    <th>Member</th>
+                    <th>Book</th>
+                    <th>Issue Date</th>
+                    <th>Due Date</th>
+                    <th>Action</th>
 
-            <td>
-                <?php echo $transaction["issue_date"]; ?>
-            </td>
+                </tr>
 
-            <td>
-                <?php echo $transaction["due_date"]; ?>
-            </td>
-
-            <td>
-
-                <form method="POST">
-
-                    <input
-                        type="hidden"
-                        name="transaction_id"
-                        value="<?php echo $transaction["id"]; ?>"
-                    >
-
-                    <button type="submit">
-                        Return
-                    </button>
-
-                </form>
-
-            </td>
-
-        </tr>
-
-    <?php endwhile; ?>
-
-    </tbody>
-
-</table>
+            </thead>
 
 
-<br>
+            <tbody>
 
-<a href="../dashboard.php">
-    Back to Dashboard
-</a>
+            <?php while ($transaction = mysqli_fetch_assoc($result)): ?>
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+                            <?php echo htmlspecialchars($transaction["member_name"]); ?>
+                        </strong>
+
+                    </td>
+
+                    <td>
+                        <?php echo htmlspecialchars($transaction["title"]); ?>
+                    </td>
+
+                    <td>
+                        <?php echo $transaction["issue_date"]; ?>
+                    </td>
+
+                    <td>
+                        <?php echo $transaction["due_date"]; ?>
+                    </td>
+
+                    <td>
+
+                        <form method="POST">
+
+                            <input
+                                type="hidden"
+                                name="transaction_id"
+                                value="<?php echo $transaction["id"]; ?>"
+                            >
+
+                            <button
+                                type="submit"
+                                class="btn btn-small btn-primary"
+                            >
+                                📥 Return
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+            <?php endwhile; ?>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</main>
 
 </body>
 

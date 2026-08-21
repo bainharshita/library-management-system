@@ -15,91 +15,156 @@ $result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Manage Books</title>
-    <script src="../assets/js/script.js"></script>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Books | Library Management</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/script.js" defer></script>
+
 </head>
 
 <body>
 
-<h1>Manage Books</h1>
+<?php include __DIR__ . "/../includes/sidebar.php"; ?>
 
-<a href="add.php">+ Add Book</a>
+<main>
 
-<br><br>
-<input
-    type="text"
-    id="bookSearch"
-    placeholder="Search books..."
->
+    <div class="page-title page-title-row">
 
-<table id="booksTable" border="1" cellpadding="10">
+        <div>
 
-   <thead>
+            <h1>Books</h1>
 
-    <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>ISBN</th>
-        <th>Category</th>
-        <th>Total</th>
-        <th>Available</th>
-        <th>Actions</th>
-    </tr>
+            <p>Manage your library collection.</p>
 
-</thead>
+        </div>
 
-<tbody>
+        <a href="add.php" class="btn btn-primary">
+            + Add Book
+        </a>
 
-<?php while ($book = mysqli_fetch_assoc($result)): ?>
+    </div>
 
-    <tr>
 
-        <td><?php echo $book["id"]; ?></td>
+    <div class="search-box">
 
-        <td><?php echo htmlspecialchars($book["title"]); ?></td>
+        <input
+            type="text"
+            id="bookSearch"
+            placeholder="🔎 Search by title, author, ISBN..."
+        >
 
-        <td><?php echo htmlspecialchars($book["author"]); ?></td>
+    </div>
 
-        <td><?php echo htmlspecialchars($book["isbn"]); ?></td>
 
-        <td><?php echo htmlspecialchars($book["category"]); ?></td>
+    <div class="table-container">
 
-        <td><?php echo $book["quantity"]; ?></td>
+        <table id="booksTable">
 
-        <td><?php echo $book["available"]; ?></td>
+            <thead>
 
-        <td>
+                <tr>
 
-            <a href="edit.php?id=<?php echo $book["id"]; ?>">
-                Edit
-            </a>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Total</th>
+                    <th>Available</th>
+                    <th>Status</th>
+                    <th>Actions</th>
 
-            |
+                </tr>
 
-            <a
-                href="delete.php?id=<?php echo $book["id"]; ?>"
-                onclick="return confirmDelete();"
-            >
-                Delete
-            </a>
+            </thead>
 
-        </td>
+            <tbody>
 
-    </tr>
+            <?php while ($book = mysqli_fetch_assoc($result)): ?>
 
-<?php endwhile; ?>
+                <tr>
 
-</tbody>
+                    <td>
+                        <?php echo $book["id"]; ?>
+                    </td>
 
-</table>
+                    <td>
+                        <strong>
+                            <?php echo htmlspecialchars($book["title"]); ?>
+                        </strong>
+                    </td>
 
-<br>
+                    <td>
+                        <?php echo htmlspecialchars($book["author"]); ?>
+                    </td>
 
-<a href="../dashboard.php">Back to Dashboard</a>
+                    <td>
+                        <?php echo htmlspecialchars($book["isbn"]); ?>
+                    </td>
+
+                    <td>
+                        <?php echo $book["quantity"]; ?>
+                    </td>
+
+                    <td>
+                        <?php echo $book["available"]; ?>
+                    </td>
+
+                    <td>
+
+                        <?php if ($book["available"] > 0): ?>
+
+                            <span class="status status-available">
+                                Available
+                            </span>
+
+                        <?php else: ?>
+
+                            <span class="status status-unavailable">
+                                Unavailable
+                            </span>
+
+                        <?php endif; ?>
+
+                    </td>
+
+                    <td class="actions">
+
+                        <a
+                            href="edit.php?id=<?php echo $book["id"]; ?>"
+                            class="btn btn-small btn-edit"
+                        >
+                            Edit
+                        </a>
+
+                        <a
+                            href="delete.php?id=<?php echo $book["id"]; ?>"
+                            class="btn btn-small btn-delete"
+                            onclick="return confirmDelete();"
+                        >
+                            Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            <?php endwhile; ?>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</main>
 
 </body>
 

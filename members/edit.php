@@ -84,67 +84,137 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Edit Member</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Member | Library Management</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
 </head>
 
 <body>
 
-<h1>Edit Member</h1>
+<?php include __DIR__ . "/../includes/sidebar.php"; ?>
 
-<?php if ($message): ?>
-    <p><?php echo htmlspecialchars($message); ?></p>
-<?php endif; ?>
+<main>
 
-<form method="POST">
+    <div class="page-title">
 
-    <label>Name</label><br>
+        <h1>Edit Member</h1>
 
-    <input
-        type="text"
-        name="name"
-        value="<?php echo htmlspecialchars($member["member_name"]); ?>"
-        required
-    >
+        <p>Update member information.</p>
 
-    <br><br>
+    </div>
 
-    <label>Email</label><br>
 
-    <input
-        type="email"
-        name="email"
-        value="<?php echo htmlspecialchars($member["email"]); ?>"
-        required
-    >
+    <?php if (!empty($message)): ?>
 
-    <br><br>
+        <div class="message">
+            <?php echo htmlspecialchars($message); ?>
+        </div>
 
-    <label>Phone</label><br>
+    <?php endif; ?>
 
-    <input
-        type="text"
-        name="phone"
-        value="<?php echo htmlspecialchars($member["phone"]); ?>"
-    >
 
-    <br><br>
+    <div class="form-container">
 
-    <label>Address</label><br>
+        <form method="POST">
 
-    <textarea name="address"><?php echo htmlspecialchars($member["address"]); ?></textarea>
 
-    <br><br>
+            <div class="form-group">
 
-    <button type="submit">Update Member</button>
+                <label for="name">
+                    Full Name
+                </label>
 
-</form>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="<?php echo htmlspecialchars($member["member_name"]); ?>"
+                    required
+                >
 
-<br>
+            </div>
 
-<a href="manage.php">Back to Members</a>
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="<?php echo htmlspecialchars($member["email"]); ?>"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="phone">
+                    Phone Number
+                </label>
+
+                <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    value="<?php echo htmlspecialchars($member["phone"]); ?>"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="address">
+                    Address
+                </label>
+
+                <textarea
+                    id="address"
+                    name="address"
+                    rows="4"
+                ><?php echo htmlspecialchars($member["address"]); ?></textarea>
+
+            </div>
+
+
+            <div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Save Changes
+                </button>
+
+                <a
+                    href="manage.php"
+                    class="btn btn-secondary"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
 
 </body>
 

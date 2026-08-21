@@ -115,105 +115,173 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Issue Book</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Issue Book | Library Management</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
 </head>
 
 <body>
 
-<h1>Issue Book</h1>
+<?php include __DIR__ . "/../includes/sidebar.php"; ?>
 
-<?php if ($message): ?>
+<main>
 
-    <p>
-        <?php echo htmlspecialchars($message); ?>
-    </p>
+    <div class="page-title">
 
-<?php endif; ?>
+        <h1>Issue Book</h1>
 
+        <p>Issue a book to a registered library member.</p>
 
-<form method="POST">
-
-    <label>Member</label><br>
-
-    <select name="member_id" required>
-
-        <option value="">Select Member</option>
-
-        <?php while ($member = mysqli_fetch_assoc($members_result)): ?>
-
-            <option value="<?php echo $member["id"]; ?>">
-                <?php echo htmlspecialchars($member["member_name"]); ?>
-            </option>
-
-        <?php endwhile; ?>
-
-    </select>
+    </div>
 
 
-    <br><br>
+    <?php if (!empty($message)): ?>
+
+        <div class="message">
+            <?php echo htmlspecialchars($message); ?>
+        </div>
+
+    <?php endif; ?>
 
 
-    <label>Book</label><br>
+    <div class="form-container">
 
-    <select name="book_id" required>
-
-        <option value="">Select Book</option>
-
-        <?php while ($book = mysqli_fetch_assoc($books_result)): ?>
-
-            <option value="<?php echo $book["id"]; ?>">
-
-                <?php echo htmlspecialchars($book["title"]); ?>
-
-                (<?php echo $book["available"]; ?> available)
-
-            </option>
-
-        <?php endwhile; ?>
-
-    </select>
+        <form method="POST">
 
 
-    <br><br>
+            <div class="form-group">
+
+                <label for="member_id">
+                    Select Member
+                </label>
+
+                <select
+                    name="member_id"
+                    id="member_id"
+                    required
+                >
+
+                    <option value="">
+                        Select a member
+                    </option>
+
+                    <?php while ($member = mysqli_fetch_assoc($members_result)): ?>
+
+                        <option value="<?php echo $member["id"]; ?>">
+
+                            <?php echo htmlspecialchars($member["member_name"]); ?>
+
+                        </option>
+
+                    <?php endwhile; ?>
+
+                </select>
+
+            </div>
 
 
-    <label>Issue Date</label><br>
+            <div class="form-group">
 
-    <input
-        type="date"
-        name="issue_date"
-        value="<?php echo date('Y-m-d'); ?>"
-        required
-    >
+                <label for="book_id">
+                    Select Book
+                </label>
+
+                <select
+                    name="book_id"
+                    id="book_id"
+                    required
+                >
+
+                    <option value="">
+                        Select an available book
+                    </option>
+
+                    <?php while ($book = mysqli_fetch_assoc($books_result)): ?>
+
+                        <option value="<?php echo $book["id"]; ?>">
+
+                            <?php echo htmlspecialchars($book["title"]); ?>
+
+                            (<?php echo $book["available"]; ?> available)
+
+                        </option>
+
+                    <?php endwhile; ?>
+
+                </select>
+
+            </div>
 
 
-    <br><br>
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="issue_date">
+                        Issue Date
+                    </label>
+
+                    <input
+                        type="date"
+                        name="issue_date"
+                        id="issue_date"
+                        value="<?php echo date('Y-m-d'); ?>"
+                        required
+                    >
+
+                </div>
 
 
-    <label>Due Date</label><br>
+                <div class="form-group">
 
-    <input
-        type="date"
-        name="due_date"
-        required
-    >
+                    <label for="due_date">
+                        Due Date
+                    </label>
+
+                    <input
+                        type="date"
+                        name="due_date"
+                        id="due_date"
+                        required
+                    >
+
+                </div>
+
+            </div>
 
 
-    <br><br>
+            <div>
 
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    📤 Issue Book
+                </button>
 
-    <button type="submit">
-        Issue Book
-    </button>
+                <a
+                    href="../dashboard.php"
+                    class="btn btn-secondary"
+                >
+                    Cancel
+                </a>
 
-</form>
+            </div>
 
-<br>
+        </form>
 
-<a href="../dashboard.php">Back to Dashboard</a>
+    </div>
+
+</main>
 
 </body>
 

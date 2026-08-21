@@ -53,54 +53,141 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Add Book</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Book | Library Management</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
 </head>
 
 <body>
 
-<h1>Add New Book</h1>
+<?php include __DIR__ . "/../includes/sidebar.php"; ?>
 
-<?php if ($message): ?>
-    <p><?php echo htmlspecialchars($message); ?></p>
-<?php endif; ?>
+<main>
 
-<form method="POST">
+    <div class="page-title">
 
-    <label>Book Title</label><br>
-    <input type="text" name="title" required>
+        <h1>Add Book</h1>
 
-    <br><br>
+        <p>Add a new book to your library collection.</p>
 
-    <label>Author</label><br>
-    <input type="text" name="author" required>
+    </div>
 
-    <br><br>
 
-    <label>ISBN</label><br>
-    <input type="text" name="isbn">
+    <?php if (!empty($message)): ?>
 
-    <br><br>
+        <div class="message">
+            <?php echo htmlspecialchars($message); ?>
+        </div>
 
-    <label>Category</label><br>
-    <input type="text" name="category">
+    <?php endif; ?>
 
-    <br><br>
 
-    <label>Quantity</label><br>
-    <input type="number" name="quantity" min="1" required>
+    <div class="form-container">
 
-    <br><br>
+        <form method="POST">
 
-    <button type="submit">Add Book</button>
 
-</form>
+            <div class="form-group">
 
-<br>
+                <label for="title">
+                    Book Title
+                </label>
 
-<a href="manage.php">View Books</a>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="Enter book title"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="author">
+                    Author
+                </label>
+
+                <input
+                    type="text"
+                    id="author"
+                    name="author"
+                    placeholder="Enter author name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="isbn">
+                    ISBN
+                </label>
+
+                <input
+                    type="text"
+                    id="isbn"
+                    name="isbn"
+                    placeholder="Enter ISBN"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="quantity">
+                    Quantity
+                </label>
+
+                <input
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    min="1"
+                    placeholder="Enter quantity"
+                    required
+                >
+
+            </div>
+
+
+            <div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Add Book
+                </button>
+
+                <a
+                    href="manage.php"
+                    class="btn btn-secondary"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
 
 </body>
 

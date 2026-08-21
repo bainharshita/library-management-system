@@ -1,8 +1,10 @@
 function confirmDelete() {
-    return confirm("Are you sure you want to delete this record?");
+    return confirm("Are you sure you want to delete this book?");
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    /* BOOK SEARCH */
 
     const bookSearch = document.getElementById("bookSearch");
     const booksTable = document.getElementById("booksTable");
@@ -19,14 +21,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const rowText = row.textContent.toLowerCase();
 
-                row.style.display =
-                    rowText.includes(searchText) ? "" : "none";
+                if (rowText.includes(searchText)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
 
             });
 
         });
+
     }
 
+
+    /* MEMBER SEARCH */
 
     const memberSearch = document.getElementById("memberSearch");
     const membersTable = document.getElementById("membersTable");
@@ -43,12 +51,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const rowText = row.textContent.toLowerCase();
 
-                row.style.display =
-                    rowText.includes(searchText) ? "" : "none";
+                if (rowText.includes(searchText)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
 
             });
 
         });
+
     }
 
 });
