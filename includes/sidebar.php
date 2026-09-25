@@ -11,8 +11,8 @@ $current_page = basename($_SERVER["PHP_SELF"]);
         <div class="logo-icon">📚</div>
 
         <div>
-            <h2>Libra</h2>
-            <span>Management System</span>
+            <h2>Green Shelf</h2>
+            <span>Library Management System</span>
         </div>
 
     </div>
@@ -53,6 +53,16 @@ $current_page = basename($_SERVER["PHP_SELF"]);
             Add Member
         </a>
 
+        <a href="/library-management/book-requests.php">
+            <span>📋</span>
+            Book Requests
+        </a>
+
+        <a href="/library-management/add-admin.php" class="nav-link">
+            <span>🛡️</span>
+            <span>Add Admin</span>
+        </a>
+
 
         <p class="nav-heading">TRANSACTIONS</p>
 
@@ -76,7 +86,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
 
     <div class="sidebar-bottom">
 
-        <a href="/library-management/logout.php" class="logout-link">
+        <a href="/library-management/logout.php" class="nav-link">
             <span>🚪</span>
             Logout
         </a>
