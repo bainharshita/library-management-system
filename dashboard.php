@@ -73,7 +73,7 @@ $recent_result = mysqli_query($conn, $recent_sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | GreenShelf</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=2">
 </head>
 
 <body>
@@ -302,6 +302,8 @@ $recent_result = mysqli_query($conn, $recent_sql);
     </div>
 
 </main>
+
+<script src="assets/js/script.js"></script>
 
 </body>
 </html>

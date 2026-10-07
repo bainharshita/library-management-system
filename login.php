@@ -125,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <link
         rel="stylesheet"
-        href="assets/css/style.css"
+        href="assets/css/style.css?v=2"
     >
 
 </head>
@@ -153,9 +153,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
 
     </div>
+    <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobileNav"
+    >
+        ☰
+    </button>
 
-
-    <nav>
+    <nav id="mobileNav">
 
         <a href="#home">Home</a>
 
@@ -1022,6 +1030,36 @@ contactForm.addEventListener("submit", async function (event) {
     }
 });
 
+//hamburger javascript
+
+const menuToggle = document.getElementById("menuToggle");
+const mobileNav = document.getElementById("mobileNav");
+
+if (menuToggle && mobileNav) {
+
+    menuToggle.addEventListener("click", function () {
+        mobileNav.classList.toggle("active");
+
+        const isOpen = mobileNav.classList.contains("active");
+
+        menuToggle.setAttribute("aria-expanded", isOpen);
+        menuToggle.setAttribute(
+            "aria-label",
+            isOpen ? "Close navigation menu" : "Open navigation menu"
+        );
+
+        menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    mobileNav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+            mobileNav.classList.remove("active");
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.setAttribute("aria-label", "Open navigation menu");
+            menuToggle.textContent = "☰";
+        });
+    });
+}
 </script>
 
 

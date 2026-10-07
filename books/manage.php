@@ -25,7 +25,7 @@ $result = mysqli_query($conn, $sql);
 
     <title>Books | Library Management</title>
 
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css?v=2">
     <script src="../assets/js/script.js" defer></script>
 
 </head>
@@ -72,6 +72,7 @@ $result = mysqli_query($conn, $sql);
 
                 <tr>
 
+                    <th>S. No.</th>
                     <th>ID</th>
                     <th>Title</th>
                     <th>Author</th>
@@ -87,10 +88,15 @@ $result = mysqli_query($conn, $sql);
 
             <tbody>
 
+            <?php $serial = 1; ?>
             <?php while ($book = mysqli_fetch_assoc($result)): ?>
 
                 <tr>
 
+                     <td>
+                        <?php echo $serial++; ?>
+                    </td>
+                    
                     <td>
                         <?php echo $book["id"]; ?>
                     </td>

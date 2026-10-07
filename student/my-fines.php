@@ -59,7 +59,7 @@ while ($fine = mysqli_fetch_assoc($result)) {
 
     <title>My Fines | GreenShelf</title>
 
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css?v=2">
 
     <style>
         .fines-page {

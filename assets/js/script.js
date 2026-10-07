@@ -63,4 +63,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+    /* ADMIN SIDEBAR TOGGLE (mobile) */
+
+    const adminMenuToggle = document.getElementById("adminMenuToggle");
+    const adminSidebar = document.querySelector(".sidebar");
+    const adminOverlay = document.getElementById("sidebarOverlay");
+
+    if (adminMenuToggle && adminSidebar && adminOverlay) {
+
+        adminMenuToggle.addEventListener("click", function () {
+            adminSidebar.classList.toggle("open");
+            adminOverlay.classList.toggle("active");
+        });
+
+        adminOverlay.addEventListener("click", function () {
+            adminSidebar.classList.remove("open");
+            adminOverlay.classList.remove("active");
+        });
+
+    }
+
 });

@@ -242,7 +242,7 @@ $result = mysqli_query($conn, $sql);
 
     <title>Book Requests | GreenShelf</title>
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=2">
 
     <style>
         .requests-page {
@@ -551,6 +551,8 @@ $result = mysqli_query($conn, $sql);
     <?php endif; ?>
 
 </main>
+
+<script src="assets/js/script.js"></script>
 
 </body>
 </html>

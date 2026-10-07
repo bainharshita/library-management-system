@@ -125,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <title>Issue Book | Library Management</title>
 
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css?v=2">
 
 </head>
 
@@ -282,6 +282,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
 </main>
+
+<script src="../assets/js/script.js"></script>
 
 </body>
 

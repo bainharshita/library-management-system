@@ -234,30 +234,6 @@ tr:hover {
 
 @media (max-width: 700px) {
 
-    .sidebar {
-        position: relative;
-
-        width: 100%;
-
-        height: auto;
-
-        min-height: auto;
-    }
-
-    .sidebar-nav {
-        gap: 3px;
-    }
-
-    .sidebar-bottom {
-        margin-top: 15px;
-    }
-
-    main {
-        margin-left: 0;
-
-        padding: 20px;
-    }
-
     .dashboard-cards {
         grid-template-columns: 1fr;
     }
@@ -1483,22 +1459,6 @@ table form button {
 }
 
 @media (max-width: 700px) {
-    .landing-navbar {
-        height: auto;
-        padding: 15px 20px;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .landing-navbar nav {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .landing-navbar nav a:not(.nav-login) {
-        display: none;
-    }
-
     .hero {
         padding: 45px 20px;
     }
@@ -2076,7 +2036,10 @@ main:has(.dashboard-cards) {
 
 @media (max-width: 700px) {
     main:has(.dashboard-cards) {
-        padding: 22px 16px;
+        padding-top: 140px !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        padding-bottom: 20px !important;
     }
 
     .dashboard-cards {
@@ -2731,4 +2694,475 @@ html {
     .feature-strip {
         margin-bottom: 40px;
     }
+}
+
+/* =====================================
+   Mobile: Landing hamburger + Admin sidebar
+   (Single source of truth — no duplicates)
+   ===================================== */
+
+/* --- Landing page hamburger button (hidden on desktop) --- */
+.menu-toggle {
+    display: none;
+    background: #075c39;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* --- Admin sidebar hamburger + overlay (hidden on desktop) --- */
+.admin-menu-toggle {
+    display: none;
+}
+
+.sidebar-overlay {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    .admin-menu-toggle {
+        display: block;
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        z-index: 1002;
+        background: #245b3a;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 280px;
+        max-width: 85vw;
+        height: 100vh;
+        height: 100dvh;
+        box-sizing: border-box;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1001;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar-nav {
+        overflow-y: auto;
+        min-height: 0;
+    }
+
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+
+    main {
+        margin-left: 0 !important;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 140px 16px 20px 16px !important;
+    }
+
+    body:not(.has-student) main > .page-title {
+        margin-top: 0 !important;
+    }
+
+    main > .page-title {
+        margin-top: 0 !important;
+    }
+
+    .page-title {
+        margin-left: 0;
+    }
+
+    .dashboard-cards,
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Very small phones: vertical stack + font scaling */
+@media (max-width: 420px) {
+    main {
+        padding: 140px 12px 20px 12px !important;
+    }
+
+    main:has(.dashboard-cards) {
+        padding: 140px 12px 20px 12px !important;
+    }
+
+    .page-title h1 {
+        font-size: 26px;
+        line-height: 1.2;
+    }
+
+    .page-title p {
+        font-size: 14px;
+    }
+}
+
+/* Back to Dashboard button */
+.back-dashboard-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #245b3a;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 12px 16px;
+    transition: background 0.2s ease;
+}
+
+.back-dashboard-btn:hover {
+    background: #19452b;
+}
+
+@media (max-width: 700px) {
+    .back-dashboard-btn {
+        margin: 140px 16px 12px 16px !important;
+        font-size: 14px;
+    }
+}
+
+/* --- Mobile landing page navbar (absolute dropdown) --- */
+@media (max-width: 768px) {
+
+    .landing-navbar {
+        height: 76px;
+        padding: 0 20px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .brand {
+        gap: 10px;
+    }
+
+    .brand-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .brand h2 {
+        font-size: 22px;
+    }
+
+    .brand p {
+        font-size: 10px;
+    }
+
+    /* Show hamburger */
+    .menu-toggle {
+        display: block;
+        flex-shrink: 0;
+    }
+
+    /* Hide navigation by default */
+    .landing-navbar #mobileNav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 20px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        border-top: 1px solid #e4ebe5;
+        border-bottom: 1px solid #e4ebe5;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Show navigation when hamburger is clicked */
+    .landing-navbar #mobileNav.active {
+        display: flex;
+    }
+
+    .landing-navbar #mobileNav a {
+        display: block;
+        padding: 14px 10px;
+        font-size: 16px;
+        border-radius: 6px;
+    }
+
+    .landing-navbar #mobileNav .nav-login {
+        text-align: center;
+        margin-top: 10px;
+    }
+}
+
+/* =====================================
+   LANDING PAGE RESPONSIVENESS
+   Safe overrides for smaller screens
+===================================== */
+
+/* Tablets and smaller laptops */
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        min-height: auto;
+        padding: 55px 6% 45px;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 700px;
+    }
+
+    .hero-description,
+    .hero-subtext {
+        max-width: 100%;
+    }
+
+    .book-illustration {
+        max-width: 100%;
+        margin: 20px auto 0;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 600px) {
+    .landing-navbar {
+        height: 72px;
+        padding: 0 5%;
+    }
+
+    .brand {
+        gap: 8px;
+    }
+
+    .brand-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 19px;
+    }
+
+    .brand h2 {
+        font-size: 21px;
+    }
+
+    .brand p {
+        font-size: 10px;
+    }
+
+    .hero {
+        padding: 40px 6% 35px;
+        gap: 25px;
+    }
+
+    .hero h1 {
+        font-size: clamp(32px, 9vw, 42px);
+        line-height: 1.15;
+        letter-spacing: -0.8px;
+        margin-bottom: 18px;
+    }
+
+    .hero-badge {
+        font-size: 12px;
+        padding: 8px 14px;
+        margin-bottom: 18px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 18px;
+    }
+
+    .hero-subtext {
+        font-size: 14px;
+        line-height: 1.65;
+    }
+
+    .hero-buttons {
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 25px;
+    }
+
+    .hero-primary {
+        padding: 13px 19px;
+    }
+
+    .hero-demo {
+        font-size: 14px;
+    }
+
+    .book-illustration {
+        width: 100%;
+        max-width: 360px;
+        height: auto;
+        aspect-ratio: 360 / 230;
+        margin: 15px auto 0;
+    }
+}
+
+/* =====================================
+   LANDING PAGE VISUAL POLISH
+===================================== */
+
+/* Feature cards */
+.feature-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+@media (hover: hover) {
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    }
+}
+
+/* Buttons */
+.hero-primary,
+.hero-demo,
+.nav-login {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (hover: hover) {
+    .hero-primary:hover,
+    .nav-login:hover {
+        transform: translateY(-2px);
+    }
+
+    .hero-demo:hover {
+        opacity: 0.8;
+    }
+}
+
+/* Feature section spacing */
+.features {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+/* Mobile spacing */
+@media (max-width: 600px) {
+    .features {
+        padding-top: 45px;
+        padding-bottom: 45px;
+    }
+
+    .feature-card {
+        padding: 22px;
+    }
+}
+
+/* MOBILE ADMIN SIDEBAR */
+
+.mobile-menu-toggle,
+.sidebar-overlay {
+    display: none;
+}
+
+@media (max-width: 700px) {
+
+    .mobile-menu-toggle {
+        display: flex;
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        z-index: 1102;
+        align-items: center;
+        justify-content: center;
+        width: 46px;
+        height: 46px;
+        border: none;
+        border-radius: 10px;
+        background: #145c39;
+        color: white;
+        font-size: 25px;
+        cursor: pointer;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: min(290px, 85vw) !important;
+        height: 100vh;
+        height: 100dvh;
+        z-index: 1100;
+        transform: translateX(-105%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        padding: 75px 16px 20px;
+    }
+
+    .sidebar.sidebar-open {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay.overlay-visible {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 1099;
+        background: rgba(0, 0, 0, 0.45);
+    }
+
+    main {
+        margin-left: 0 !important;
+        width: 100%;
+        max-width: 100%;
+        padding: 75px 16px 25px !important;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .quick-actions {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .dashboard-cards .card,
+    .action-card {
+        min-width: 0;
+    }
+}
+
+
+
+/* FIX BACK TO DASHBOARD BUTTON ON MOBILE */
+
+@media (max-width: 700px) {
+
+    .back-dashboard-btn {
+        margin-left: 60px !important;
+        position: relative;
+        z-index: 1101;
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+    }
+
 }

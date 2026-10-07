@@ -23,9 +23,14 @@ $memberName = $_SESSION["member_name"] ?? "Student";
 
     <title>GreenShelf | Student Dashboard</title>
 
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css?v=2">
 
+    
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -34,96 +39,249 @@ $memberName = $_SESSION["member_name"] ?? "Student";
         }
 
         .student-dashboard {
-            max-width: 1150px;
+            max-width: 1250px;
             margin: auto;
-            padding: 35px 25px;
+            padding: 40px 30px;
         }
 
+        /* Header */
         .student-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         .student-header h1 {
             color: #245b3c;
+            font-size: 36px;
+            letter-spacing: -0.8px;
             margin: 0 0 8px;
         }
 
         .student-header p {
             color: #718074;
             margin: 0;
+            font-size: 16px;
         }
 
         .logout-button {
             background: #245b3c;
             color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
+            padding: 13px 23px;
+            border-radius: 10px;
             text-decoration: none;
+            font-weight: 600;
+            transition: background 0.25s ease, transform 0.25s ease;
         }
 
+        .logout-button:hover {
+            background: #19472d;
+            transform: translateY(-2px);
+        }
+
+        /* Welcome Banner */
         .welcome-card {
-            background: linear-gradient(135deg, #245b3c, #57956b);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(120deg, #1f5b3b, #4f9165);
             color: white;
-            padding: 35px;
-            border-radius: 18px;
-            margin-bottom: 30px;
+            padding: 42px;
+            border-radius: 22px;
+            margin-bottom: 35px;
+            box-shadow: 0 12px 30px rgba(36, 91, 60, 0.12);
+        }
+
+        .welcome-card::after {
+            content: "📚";
+            position: absolute;
+            right: 55px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 85px;
+            opacity: 0.16;
+            pointer-events: none;
         }
 
         .welcome-card h2 {
-            font-size: 28px;
-            margin-top: 0;
+            font-size: clamp(24px, 3vw, 32px);
+            margin: 0 0 12px;
+            line-height: 1.3;
+            position: relative;
+            z-index: 1;
         }
 
         .welcome-card p {
-            line-height: 1.7;
+            line-height: 1.8;
+            font-size: 16px;
+            max-width: 780px;
+            margin: 0;
+            color: rgba(255, 255, 255, 0.92);
+            position: relative;
+            z-index: 1;
         }
 
+        /* Dashboard Cards */
         .student-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 24px;
         }
 
         .student-card {
+            position: relative;
             background: white;
-            padding: 25px;
-            border-radius: 14px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 30px 26px;
+            border: 1px solid #e6eee5;
+            border-radius: 18px;
+            box-shadow: 0 5px 18px rgba(38, 59, 45, 0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            min-height: 260px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease,
+                        border-color 0.25s ease;
+        }
+
+        .student-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 26px;
+            width: 42px;
+            height: 4px;
+            background: #70aa76;
+            border-radius: 0 0 5px 5px;
         }
 
         .student-card .icon {
-            font-size: 32px;
+            font-size: 36px;
+            margin: 8px 0 14px;
         }
 
         .student-card h3 {
             color: #245b3c;
+            font-size: 20px;
+            margin: 0 0 10px;
+            line-height: 1.4;
         }
 
         .student-card p {
             color: #718074;
-            line-height: 1.6;
+            line-height: 1.75;
+            font-size: 15px;
+            margin: 0 0 18px;
         }
 
         .student-card a {
             display: inline-block;
-            margin-top: 10px;
+            margin-top: auto;
+            padding-top: 8px;
             color: #34734a;
             font-weight: bold;
             text-decoration: none;
+            transition: color 0.2s ease;
         }
 
+        .student-card a:hover {
+            color: #19472d;
+        }
+
+        @media (hover: hover) {
+            .student-card:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 14px 30px rgba(36, 91, 60, 0.10);
+                border-color: #c9dfc9;
+            }
+        }
+
+        /* Tablet */
+        @media (max-width: 1000px) {
+            .student-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .welcome-card::after {
+                right: 30px;
+                font-size: 70px;
+            }
+        }
+
+        /* Mobile */
         @media (max-width: 600px) {
             .student-dashboard {
-                padding: 20px;
+                padding: 24px 18px;
+            }
+
+            .student-header {
+                margin-bottom: 25px;
+            }
+
+            .student-header h1 {
+                font-size: 29px;
+            }
+
+            .logout-button {
+                padding: 11px 17px;
             }
 
             .welcome-card {
-                padding: 25px;
+                padding: 28px 24px;
+                border-radius: 17px;
+                margin-bottom: 25px;
+            }
+
+            .welcome-card::after {
+                right: 15px;
+                top: 15px;
+                transform: none;
+                font-size: 48px;
+            }
+
+            .welcome-card h2 {
+                font-size: 24px;
+                max-width: 90%;
+            }
+
+            .welcome-card p {
+                font-size: 14px;
+                line-height: 1.8;
+            }
+
+            .student-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .student-card {
+                min-height: auto;
+                padding: 26px 24px;
+            }
+        }
+
+        /* Small phones */
+        @media (max-width: 360px) {
+            .student-dashboard {
+                padding: 20px 14px;
+            }
+
+            .welcome-card {
+                padding: 24px 18px;
+            }
+
+            .student-card {
+                padding: 24px 20px;
+            }
+        }
+
+        /* Reduced motion accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .student-card,
+            .student-card a,
+            .logout-button {
+                transition: none;
             }
         }
     </style>

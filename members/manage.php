@@ -27,7 +27,7 @@ $result = mysqli_query($conn, $sql);
 
     <title>Members | Library Management</title>
 
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css?v=2">
 
     <script src="../assets/js/script.js" defer></script>
 
@@ -74,7 +74,7 @@ $result = mysqli_query($conn, $sql);
             <thead>
 
                 <tr>
-
+                    <th>S. No.</th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
@@ -88,9 +88,15 @@ $result = mysqli_query($conn, $sql);
 
             <tbody>
 
+            <?php $serial = 1; ?>
+
             <?php while ($member = mysqli_fetch_assoc($result)): ?>
 
                 <tr>
+
+                    <td>
+                        <?php echo $serial++; ?>
+                    </td>
 
                     <td>
                         <?php echo $member["id"]; ?>
